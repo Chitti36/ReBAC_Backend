@@ -4,9 +4,10 @@ import pandas as pd
 import os
 import shutil
 
-from model.train_model import load_data, train_decision_tree, save_model
-from model.policy_utils import load_model as load_saved_model, extract_rules, format_rules
-from model.fp_analysis import detect_false_positives
+from train_model import load_data, train_decision_tree, save_model
+from policy_utils import load_model, extract_rules, format_rules
+from fp_analysis import detect_false_positives
+
 
 app = FastAPI()
 
