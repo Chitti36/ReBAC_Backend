@@ -39,8 +39,8 @@ async def train(file: UploadFile = File(...)):
 async def train(file: UploadFile = File(...)):
     try:
         # ✅ Make sure 'backend/data' folder exists
-       os.makedirs("data", exist_ok=True)
-       os.makedirs("model", exist_ok=True)
+        os.makedirs("data", exist_ok=True)
+        os.makedirs("model", exist_ok=True)
 
         # ✅ Save uploaded file to backend/data/uploaded.csv
         with open(DATA_PATH, "wb") as f:
