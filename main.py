@@ -11,8 +11,8 @@ from fp_analysis import detect_false_positives
 
 app = FastAPI()
 
-DATA_PATH = "data/uploaded.csv"
-MODEL_PATH = "model/model.joblib"
+DATA_PATH = "backend/data/uploaded.csv"
+MODEL_PATH = "backend/model/model.joblib"
 
 @app.get("/")
 def root():
@@ -38,9 +38,7 @@ async def train(file: UploadFile = File(...)):
 async def train(file: UploadFile = File(...)):
     try:
         # ✅ Make sure 'backend/data' folder exists
-        os.makedirs("data", exist_ok=True)
-        os.makedirs("model", exist_ok=True)
-
+        os.makedirs("backend/data", exist_ok=True)
 
         # ✅ Save uploaded file to backend/data/uploaded.csv
         with open(DATA_PATH, "wb") as f:
