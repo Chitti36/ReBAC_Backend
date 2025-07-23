@@ -11,8 +11,8 @@ from fp_analysis import detect_false_positives
 
 app = FastAPI()
 
-DATA_PATH = "backend/data/uploaded.csv"
-MODEL_PATH = "backend/model/model.joblib"
+DATA_PATH = "data/uploaded.csv"
+MODEL_PATH = "model/model.joblib"
 
 @app.get("/")
 def root():
