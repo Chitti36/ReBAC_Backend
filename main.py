@@ -11,8 +11,9 @@ from fp_analysis import detect_false_positives
 
 app = FastAPI()
 
-DATA_PATH = "backend/data/uploaded.csv"
-MODEL_PATH = "backend/model/model.joblib"
+DATA_PATH = "data/uploaded.csv"
+MODEL_PATH = "model/model.joblib"
+
 
 @app.get("/")
 def root():
@@ -38,7 +39,8 @@ async def train(file: UploadFile = File(...)):
 async def train(file: UploadFile = File(...)):
     try:
         # ✅ Make sure 'backend/data' folder exists
-        os.makedirs("backend/data", exist_ok=True)
+       os.makedirs("data", exist_ok=True)
+       os.makedirs("model", exist_ok=True)
 
         # ✅ Save uploaded file to backend/data/uploaded.csv
         with open(DATA_PATH, "wb") as f:
@@ -55,16 +57,16 @@ async def train(file: UploadFile = File(...)):
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
-@app.get("/rules")
 def get_rules():
     try:
         model, features = load_saved_model(MODEL_PATH)
         rules = extract_rules(model, features)
         formatted = format_rules(rules)
     except Exception as e:
+        print("Error in /rules:", str(e))
         return JSONResponse(content={"error": str(e)}, status_code=500)
-
     return {"rules": formatted}
+
 
 @app.get("/false_positives")
 def get_false_positives():
